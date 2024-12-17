@@ -7,10 +7,17 @@ import (
 	"strings"
 )
 
+const baseURL = "https://pokeapi.co/api/v2/location-area/"
+
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(c *Config) error
+}
+
+type Config struct {
+	next string
+	prev string
 }
 
 var cmd map[string]cliCommand
@@ -20,19 +27,35 @@ func init() {
 		"help": {
 			name:        "help",
 			description: "Displays a help message",
-			callback: func() error {
-				return commandHelp(cmd)
+			callback: func(c *Config) error {
+				return commandHelp(cmd, c)
 			},
 		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
-			callback:    commandExit,
+			callback: func(c *Config) error {
+				return commandExit(c)
+			},
+		},
+		"map": {
+			name:        "map",
+			description: "show next 20 location areas in the Pokemon world",
+			callback: func(c *Config) error {
+				return commandMap(c)
+			},
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "show previous 20 location areas in the Pokemon world",
+			callback: func(c *Config) error {
+				return commandMapb(c)
+			},
 		},
 	}
 }
-
 func startRepl() {
+	config := Config{baseURL, ""}
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -44,7 +67,7 @@ func startRepl() {
 		commandName := words[0]
 		command, ok := cmd[commandName]
 		if ok {
-			err := command.callback()
+			err := command.callback(&config)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -54,7 +77,6 @@ func startRepl() {
 			continue
 		}
 	}
-
 }
 
 func cleanInput(text string) []string {
