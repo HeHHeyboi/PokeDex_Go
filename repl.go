@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/HeHHeyboi/pokedexcli/internal/pokeapi"
 )
 
-const baseURL = "https://pokeapi.co/api/v2/location-area/"
+const baseURL = "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20"
 
 type cliCommand struct {
 	name        string
@@ -16,8 +18,9 @@ type cliCommand struct {
 }
 
 type Config struct {
-	next string
-	prev string
+	pokeclient pokeapi.Client
+	next       string
+	prev       string
 }
 
 var cmd map[string]cliCommand
@@ -54,8 +57,7 @@ func init() {
 		},
 	}
 }
-func startRepl() {
-	config := Config{baseURL, ""}
+func startRepl(cfg *Config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -67,7 +69,7 @@ func startRepl() {
 		commandName := words[0]
 		command, ok := cmd[commandName]
 		if ok {
-			err := command.callback(&config)
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
