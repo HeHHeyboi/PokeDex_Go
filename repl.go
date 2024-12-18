@@ -14,7 +14,7 @@ const baseURL = "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20"
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(c *Config) error
+	callback    func(c *Config, arg string) error
 }
 
 type Config struct {
@@ -30,29 +30,37 @@ func init() {
 		"help": {
 			name:        "help",
 			description: "Displays a help message",
-			callback: func(c *Config) error {
+			callback: func(c *Config, arg string) error {
 				return commandHelp(cmd, c)
 			},
 		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
-			callback: func(c *Config) error {
+			callback: func(c *Config, arg string) error {
 				return commandExit(c)
 			},
 		},
 		"map": {
 			name:        "map",
 			description: "show next 20 location areas in the Pokemon world",
-			callback: func(c *Config) error {
+			callback: func(c *Config, arg string) error {
 				return commandMap(c)
 			},
 		},
 		"mapb": {
 			name:        "mapb",
 			description: "show previous 20 location areas in the Pokemon world",
-			callback: func(c *Config) error {
+			callback: func(c *Config, arg string) error {
 				return commandMapb(c)
+			},
+		},
+		"explore": {
+			name: "explore",
+			description: `explore <name> list pokemon that live inside location
+<name> : name of the city or location`,
+			callback: func(c *Config, name string) error {
+				return commandExplore(c, name)
 			},
 		},
 	}
@@ -69,7 +77,13 @@ func startRepl(cfg *Config) {
 		commandName := words[0]
 		command, ok := cmd[commandName]
 		if ok {
-			err := command.callback(cfg)
+			var err error
+			if len(words) > 1 {
+				err = command.callback(cfg, words[1])
+			} else {
+				err = command.callback(cfg, "")
+			}
+
 			if err != nil {
 				fmt.Println(err)
 			}
