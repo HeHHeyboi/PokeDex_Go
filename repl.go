@@ -23,48 +23,8 @@ type Config struct {
 	prev       string
 }
 
-var cmd map[string]cliCommand
+var pokedex map[string]*pokeapi.Pokemon_Info
 
-func init() {
-	cmd = map[string]cliCommand{
-		"help": {
-			name:        "help",
-			description: "Displays a help message",
-			callback: func(c *Config, arg string) error {
-				return commandHelp(cmd, c)
-			},
-		},
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback: func(c *Config, arg string) error {
-				return commandExit(c)
-			},
-		},
-		"map": {
-			name:        "map",
-			description: "show next 20 location areas in the Pokemon world",
-			callback: func(c *Config, arg string) error {
-				return commandMap(c)
-			},
-		},
-		"mapb": {
-			name:        "mapb",
-			description: "show previous 20 location areas in the Pokemon world",
-			callback: func(c *Config, arg string) error {
-				return commandMapb(c)
-			},
-		},
-		"explore": {
-			name: "explore",
-			description: `explore <name> list pokemon that live inside location
-<name> : name of the city or location`,
-			callback: func(c *Config, name string) error {
-				return commandExplore(c, name)
-			},
-		},
-	}
-}
 func startRepl(cfg *Config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {

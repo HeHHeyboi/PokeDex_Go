@@ -6,6 +6,9 @@ import (
 )
 
 func commandExplore(c *Config, name string) error {
+	if name == "" {
+		return fmt.Errorf("Please input city name")
+	}
 	data, err := c.pokeclient.Explore_location(name)
 	if err != nil {
 		return err

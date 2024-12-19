@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Client) Explore_location(name string) (*LocationDetail, error) {
-	url := baseURL + "/location-area/" + name
+	url := locationURL + name
 	if v, ok := c.Cache.Get(url); ok {
 		detail := LocationDetail{}
 		if err := json.Unmarshal(v, &detail); err != nil {
