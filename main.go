@@ -50,9 +50,18 @@ func init() {
 			name: "catch",
 			description: `catch a pokemon with given name
 	command: catch <name>
-	name : pokemon name`,
+	name : pokemon's name`,
 			callback: func(c *Config, name string) error {
 				return commandCatch(c, name)
+			},
+		},
+		"inspect": {
+			name: "inspect",
+			description: `show info about pokemon
+	inspect <name>
+	name: pokemon's name`,
+			callback: func(c *Config, name string) error {
+				return commandInspect(c, name)
 			},
 		},
 	}

@@ -23,7 +23,7 @@ type Config struct {
 	prev       string
 }
 
-var pokedex map[string]*pokeapi.Pokemon_Info
+var pokedex map[string]*pokeapi.Pokemon_Info = map[string]*pokeapi.Pokemon_Info{}
 
 func startRepl(cfg *Config) {
 	scanner := bufio.NewScanner(os.Stdin)
