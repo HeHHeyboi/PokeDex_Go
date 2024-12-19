@@ -2,12 +2,16 @@ package main
 
 import "fmt"
 
-func commandHelp(command map[string]cliCommand, c *Config) error {
+var cmdOrder = []string{"help", "exit", "map", "mapb", "explore", "catch", "inspect"}
+
+func commandHelp(c *Config) error {
 	fmt.Println("Welcomd to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()
-	for _, v := range command {
-		fmt.Printf("%s: %s\n", v.name, v.description)
+	for _, n := range cmdOrder {
+		command := cmd[n]
+		fmt.Printf("%s: %s\n", command.name, command.description)
+
 	}
 	fmt.Println()
 	return nil

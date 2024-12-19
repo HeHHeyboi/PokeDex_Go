@@ -14,7 +14,7 @@ func init() {
 			name:        "help",
 			description: "Displays a help message",
 			callback: func(c *Config, arg string) error {
-				return commandHelp(cmd, c)
+				return commandHelp(c)
 			},
 		},
 		"exit": {
