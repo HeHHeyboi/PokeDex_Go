@@ -64,6 +64,13 @@ func init() {
 				return commandInspect(c, name)
 			},
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "show list of pokemon that you caught",
+			callback: func(c *Config, name string) error {
+				return commandPokedex()
+			},
+		},
 	}
 }
 

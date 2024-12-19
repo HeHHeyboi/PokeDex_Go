@@ -13,7 +13,7 @@ func commandInspect(c *Config, name string) error {
 
 	fmt.Println("Status:")
 	for _, v := range pokemon.Stats {
-		fmt.Printf("  -%s: %d\n", v.Stat.Name, v.BaseStat)
+		fmt.Printf(" - %s: %d\n", v.Stat.Name, v.BaseStat)
 	}
 
 	fmt.Println("Types:")
