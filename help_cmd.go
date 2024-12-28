@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-var cmdOrder = []string{"help", "exit", "map", "mapb", "explore", "catch", "inspect"}
+var cmdOrder = []string{"help", "exit", "map", "mapb", "explore", "catch", "inspect", "pokedex"}
 
 func commandHelp(c *Config) error {
 	fmt.Println("Welcomd to the Pokedex!")
