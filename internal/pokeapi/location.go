@@ -17,7 +17,7 @@ type Region struct {
 }
 
 func (client *Client) ListLocation(pageUrl *string) (Region, error) {
-	url := baseURL + "/location-area"
+	url := locationURL
 	if *pageUrl != "" {
 		url = *pageUrl
 	}

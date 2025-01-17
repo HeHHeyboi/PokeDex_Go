@@ -5,7 +5,7 @@ import "fmt"
 var cmdOrder = []string{"help", "exit", "map", "mapb", "explore", "catch", "inspect", "pokedex"}
 
 func commandHelp(c *Config) error {
-	fmt.Println("Welcomd to the Pokedex!")
+	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()
 	for _, n := range cmdOrder {

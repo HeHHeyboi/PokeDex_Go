@@ -12,7 +12,7 @@ func commandCatch(c *Config, name string) error {
 	if name == "" {
 		return fmt.Errorf("Please input name of pokemon")
 	}
-	fmt.Println("Throwing a Pokeball at", name, "...")
+	fmt.Printf("Throwing a Pokeball at %s...\n", name)
 	pokemon, err := c.pokeclient.Get_Pokemon(name)
 	if err != nil {
 		return err
