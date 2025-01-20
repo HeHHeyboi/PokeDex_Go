@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/HeHHeyboi/pokedexcli/internal/pokeapi"
+	"github.com/HeHHeyboi/Pokedex_Go/internal/pokeapi"
 )
 
 const baseURL = "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20"

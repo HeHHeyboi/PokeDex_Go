@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/HeHHeyboi/pokedexcli/internal/pokeapi"
+	"github.com/HeHHeyboi/Pokedex_Go/internal/pokeapi"
 )
 
 var cmd map[string]cliCommand
