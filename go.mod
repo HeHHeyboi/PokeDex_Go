@@ -1,4 +1,4 @@
-module github.com/HeHHeyboi/pokedexcli
+module github.com/HeHHeyboi/Pokedex_Go
 
 go 1.23.3
 
